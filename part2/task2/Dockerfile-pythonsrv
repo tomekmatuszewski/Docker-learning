@@ -1,9 +1,12 @@
 FROM python:3.8.3-slim-buster
 
+RUN apt update && apt install nano -y
+
 LABEL maintainer=TOMEK
 
 # make dir /app and set it as WORKDIR
 
+# run mkdir not necessary
 RUN mkdir /app
 WORKDIR /app
 
@@ -11,9 +14,9 @@ WORKDIR /app
 
 COPY my_data/ my_data/
 
-RUN cd my_data
-
 EXPOSE 8000
+WORKDIR /app/my_data
 
-CMD python srv.py
+# -u give python standard output
+CMD python -u srv.py
 
