@@ -1,0 +1,19 @@
+FROM python:3.8.3-slim-buster
+
+LABEL maintainer=TOMEK
+
+# make dir /app and set it as WORKDIR
+
+RUN mkdir /app
+WORKDIR /app
+
+#copy directory my_data to current dir from WORKDIR
+
+COPY my_data/ my_data/
+
+RUN cd my_data
+
+EXPOSE 8000
+
+CMD python srv.py
+
