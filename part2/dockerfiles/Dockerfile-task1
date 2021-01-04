@@ -1,0 +1,9 @@
+FROM ubuntu:18.04
+
+LABEL maintainer="tomasz_matuszewski@o2.pl"
+
+RUN apt-get update && apt-get install procps -y
+
+ENV NAME='tomasz_matuszewski'
+
+CMD ps -aux && echo $NAME
