@@ -17,7 +17,7 @@ docker run -it python:3.8.3-slim-buster bash                    -> run bash with
 docker system prune                                             -> cleaning run killed containters
 docker rm 'image1 id' 'image2 id'                               -> remove specific containers
 
-docker run -it --name my_container ubuntu                       -> run with name of container
+docker run -it --name my_container ubuntu                       -> run with name of container -it (terminal of container)
 
 docker stop                                                     -> stop of working container -> gracefull shutdown
 docker kill 'name'                                              -> kill container
@@ -41,7 +41,52 @@ in bash # apt update && apt install nano -y
         # nano srv.py -> write python script
         # nano index.html -> write python script
         # python srv.py -> serving on port 8000
-        
+
+------------------------------------------------------------------------------------------------------------------------------
+Build Dockerfiles
+
+docker build -t tm/ubuntu-env .                                     -> build image based on dockerfile with tag (default latest version)
+                                                                     context folder with dockerfile after tag (. - current dir)
+
+
+docker build -t tm/ubuntu-env directory_with_dockerfile/  -> path to dockerfile if ofher name of dockefile 
+
+docker build -t tm/ubuntu-env:0.0.1                                   -> with viersion nr 0.0.1
+
+docker run -it tm/ubuntu-env:0.0.1 bash                               -> run built image -it -> bash
+
+build based on specific Dockerfile in directory:
+
+docker build -f dockerfiles/ubuntu_curl/Dockerfile-curl -t tm/ubuntu-env:0.0.2 . -> -f path to dockerfile / or Dockerfile_name . 
+                                                                                        name of file and . as context -> maybe current dir
+
+after change of dockerfile -> docker build ......
+
+docker run -e CURL_HOST=https://wp.pl tm/ubuntu-env:0.0.1           -> run image with params env
+
+
+
+WORKDIR name -> in Dockerfile making dir name and moving to them
+
+ADD          -> add unpack tar from url           
+COPY         -> copy file / dir  
+
+EXPOSE 8000  -> put out port 8000
+
+good pracice to kill container -> other terminal docker ps -> docker kill 
+
+docker run -p8000:8000 --name pysrv -d tm/container:latest          ->  -d run as deamon (in background)
+
+
+docker logs id / cont_name                                          -> get logs from container
+
+docker logs -f pysrv                                                -> show logs during containe live
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+Docker-compose
+
 
 
 
@@ -55,3 +100,5 @@ cat my_data/new_file.txt                                        -> read text fro
 ls my_data                                                      -> list files in directory
 echo $PWD                                                       -> write path to current dir
 apt update && apt install nano -y                               -> update packages and install nano , yes for all steps
+mv srv.py data                                                  -> move file srv.py to data directory
+cp -r path_to_dir path_to_dir                                   -> copy directory
