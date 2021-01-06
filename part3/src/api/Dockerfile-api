@@ -1,0 +1,11 @@
+FROM node:latest
+
+WORKDIR /api
+
+COPY ["db.json", "."]
+
+EXPOSE 3000
+
+RUN npm install -g json-server
+
+CMD json-server --watch db.json --host 0.0.0.0
