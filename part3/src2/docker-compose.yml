@@ -1,0 +1,27 @@
+version: '3.0'
+services:
+  api:
+    image: technical/json-server:0.0.1
+    build: 
+        context: api/
+        dockerfile: Dockerfile-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api/big_db.json:/api/db.json
+      - ./api/new_file.txt:/api/new_file.txt
+    environment:
+      - PORT=3000
+      - NAME=TM
+  ubuntu-ag:
+    image: ubuntu:18.04
+    command: echo $NAME $EMAIL
+  api-test:
+    image: api-test:0.0.1
+    build: 
+        context: test/
+        dockerfile: Dockerfile-test
+    environment:
+      - API_PORT=3333
+      - API_HOST=http://api 
+  
