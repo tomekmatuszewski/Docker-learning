@@ -13,7 +13,7 @@ def test_api_get_posts():
 
 def test_creating_post():
 	marker = random.randint(1, 100000)
-	body = {'title': 'test post', 'author': 'ag'}
+	body = {'title': f'test post{marker}', 'author': 'ag'}
 	r = requests.post(posts_uri, json=body)
 	assert r.status_code == 201
 
