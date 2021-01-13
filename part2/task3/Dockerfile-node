@@ -4,9 +4,9 @@ WORKDIR /api
 
 #COPY db.json .
 
-# copying multiple number of files COPY ["file1", "file2", ... , "destination path"]
+# copying multiple numbers of files COPY ["file1", "file2", ... , "destination path"]
 
-COPY ["db.json", "./"]
+COPY ["db.json", "."]
 
 EXPOSE 3000
 

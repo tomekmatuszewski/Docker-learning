@@ -42,6 +42,7 @@ in bash # apt update && apt install nano -y
         # nano index.html -> write python script
         # python srv.py -> serving on port 8000
 
+docker image rm [OPTIONS] IMAGE [IMAGE...]                                           -> remove image
 ------------------------------------------------------------------------------------------------------------------------------
 Build Dockerfiles
 
@@ -77,6 +78,7 @@ good pracice to kill container -> other terminal docker ps -> docker kill
 
 docker run -p8000:8000 --name pysrv -d tm/container:latest          ->  -d run as deamon (in background)
 
+docker run -p5000:3000 --name blabla                                -> from port 3000 on port 5000
 
 docker logs id / cont_name                                          -> get logs from container
 
@@ -88,8 +90,33 @@ docker logs -f pysrv                                                -> show logs
 Docker-compose
 
 
+docker-compose build                                                -> building image based on docker-compose
+docker-compose up                                                   -> run image 
+docker-compose down                                                 -> removing container docker, network is cleaned
+CRTL+C                                                              -> stopping without removing network
+
+docker network ls                                                   -> networks available
+
+docker exec -it src_api_1 bash                                      -> go to bash of existing container
+
+after updating dockerfile -> docker-compose build context
+
+docker-compose file                                                 -> .yml based on docker-compose.yml 
+.env file in the same location as docker-compose                    -> store env variables
+
+with mulitple services in one docker-compose                        -> docker-compose up name_service
+
+docker-compose run --use-aliases api-test                           -> run container in -it mode used docker-compose
 
 
+
+it is possible to send request to second container in the same network -> http://workdir:port/
+--use-aliases                                                       -> possible to use workdir in path
+
+
+overwirting of comments from docker run...................
+
+depends on in yaml                                                  -> one service is waitng for other
 ------------------------------------------------------------------------------------------------------------------------------
 
 Bash -> short reminder
@@ -102,3 +129,4 @@ echo $PWD                                                       -> write path to
 apt update && apt install nano -y                               -> update packages and install nano , yes for all steps
 mv srv.py data                                                  -> move file srv.py to data directory
 cp -r path_to_dir path_to_dir                                   -> copy directory
+cd -                                                            -> go to previous localization
